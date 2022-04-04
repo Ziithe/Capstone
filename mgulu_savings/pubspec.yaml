@@ -1,0 +1,75 @@
+name: mgulu_savings
+description: Group Savings Mobile Application by Ziithe Ewen Hiwa
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+    #Firebase Dependencies
+  cloud_firestore: ^3.1.11
+  
+  # Firebase
+  firebase_auth: ^3.3.5
+  firebase_core: ^1.14.0
+
+
+  # Validate Email
+  email_validator: ^2.0.1
+
+
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^1.0.3
+  google_fonts: ^2.3.1
+  flutter_native_splash: ^2.1.2+1
+
+
+flutter_native_splash:
+  image: assets/Images/splashLogo.png
+  color: "2B92D5"
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_launcher_icons: ^0.9.2
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/Images/Icon.PNG"
+
+  
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^1.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/Images/welcome.svg
+    - assets/Images/Welcome.png
+    - assets/Images/blue_Logo.png
+    - assets/Images/WBG_Icon.png

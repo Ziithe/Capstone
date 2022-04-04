@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "985606296219",
+    "project_id": "m-gulu-savings-app",
+    "storage_bucket": "m-gulu-savings-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985606296219:android:eb34d5c2b0314ab6bbec3e",
+        "android_client_info": {
+          "package_name": "com.example.mgulu_savings"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985606296219-h0n1us1pgofo81k5c9bdtsrd5pahrf67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPHyFKvsINCHV1NHBcmQQTxjS4cR00B78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985606296219-h0n1us1pgofo81k5c9bdtsrd5pahrf67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
