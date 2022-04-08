@@ -3,11 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mgulu_savings/Entry/userclass.dart';
+import 'package:mgulu_savings/Entry/verifyEmail.dart';
+import 'package:mgulu_savings/constants/utils.dart';
+import 'package:mgulu_savings/management/userclass.dart';
 import 'package:mgulu_savings/Screens/home.dart';
-import 'package:mgulu_savings/constants.dart';
+import 'package:mgulu_savings/constants/constants.dart';
 
-import '../size.dart';
+import '../constants/size.dart';
 
 class SignUpScreen extends StatefulWidget {
   final Function() onClickedSignIn;
@@ -303,12 +305,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void createUserinFireStore(String email, String password) async {
     if (_formKey.currentState!.validate()) {
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((res) => {
-                isLoading = false,
-                postUserDetailsToFirestore(),
-              });
+      try {
+        await _auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((res) => {
+                  isLoading = false,
+                  postUserDetailsToFirestore(),
+                });
+      } on Exception catch (e) {
+        Utils.showSnackBar("Email already registered");
+      }
     }
   }
 
@@ -328,7 +334,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => HomePage(
+        builder: (context) => emailVerification(
           uid: user.uid,
         ),
       ),

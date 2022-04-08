@@ -4,41 +4,65 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Screens/home.dart';
 
-import '../constants/constants.dart';
-import '../main.dart';
-import '../constants/size.dart';
-import '../constants/utils.dart';
+import '../../constants/constants.dart';
+import '../../constants/size.dart';
 
-class LogInScreen extends StatefulWidget {
-  final VoidCallback onClickedSignUp;
-
-  const LogInScreen({
-    Key? key,
-    required this.onClickedSignUp,
-  }) : super(key: key);
+class createGroup extends StatefulWidget {
+  final String? uid;
+  const createGroup({Key? key, this.uid}) : super(key: key);
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<createGroup> createState() => _createGroupState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _createGroupState extends State<createGroup> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final groupNameController = TextEditingController();
+  final groupTypeController = TextEditingController();
+  final groupGoalController = TextEditingController();
+  final goalFrqController = TextEditingController();
+  final groupLimitController = TextEditingController();
+  final startDateController = TextEditingController();
+  final endDateController = TextEditingController();
+
   bool isLoading = false;
   bool _hiddenPass = true;
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-
+    groupGoalController;
+    groupNameController;
+    groupTypeController;
+    groupLimitController;
+    goalFrqController;
+    startDateController;
+    endDateController;
     super.dispose();
   }
+
+  final groupTypes = [
+    'Savings and Loan Group (Gulu)',
+    'Rotational Savings Group (Chipeleganyu)',
+  ];
+
+  String? groupType;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            iconTheme: IconThemeData(color: primaryColor),
+            title: Image.asset("assets/Images/WBG_Icon.png",
+                fit: BoxFit.contain, height: 26.0, width: 26.0),
+            centerTitle: true,
+            actions: <Widget>[
+              IconButton(
+                  icon: const Icon(Icons.settings),
+                  tooltip: 'Open Settings',
+                  onPressed: () {}),
+            ]),
         body: SafeArea(
             child: SizedBox(
                 width: double.infinity,
@@ -46,21 +70,12 @@ class _LogInScreenState extends State<LogInScreen> {
                     padding: EdgeInsets.all(16.0),
                     child: SingleChildScrollView(
                         child: Column(children: [
-                      SizedBox(
-                        child: Column(
-                          children: <Widget>[
-                            Image.asset(
-                              "assets/Images/blue_Logo.png",
-                              height: screenHeight(context) * 0.07,
-                            ),
-                          ],
-                        ),
-                      ),
                       SizedBox(height: screenHeight(context) * 0.03),
                       const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          "Welcome Back",
+                          "Create Group",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             color: textColor,
                             fontSize: 28,
@@ -77,7 +92,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Email Address",
+                                  "Group Name",
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400,
@@ -87,18 +102,14 @@ class _LogInScreenState extends State<LogInScreen> {
                                     padding: EdgeInsets.symmetric(
                                         vertical: 6, horizontal: 0)),
                                 TextFormField(
-                                  controller: emailController,
+                                  controller: groupNameController,
                                   obscureText: false,
                                   cursorColor: textColor,
                                   textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.emailAddress,
                                   validator: (String? stringValue) {
                                     if (stringValue != null &&
                                         stringValue.isEmpty) {
-                                      return "Your email address is a required field, please enter it here";
-                                    } else if (stringValue != null &&
-                                        !stringValue.contains('@')) {
-                                      return "Please enter a valid email address with an @ symbol";
+                                      return "Group Name is a required field, please enter it here";
                                     }
                                     return null;
                                   },
@@ -116,7 +127,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Password",
+                                  "Group Type",
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400,
@@ -125,29 +136,10 @@ class _LogInScreenState extends State<LogInScreen> {
                                 const Padding(
                                     padding: EdgeInsets.symmetric(
                                         vertical: 6, horizontal: 0)),
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                    suffix: InkWell(
-                                      onTap: _passwordVisible,
-                                      child:
-                                          const Icon(Icons.visibility_outlined),
-                                    ),
-                                    filled: true,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 0, horizontal: 10),
-                                    border: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                  ),
-                                  controller: passwordController,
-                                  cursorColor: textColor,
-                                  obscureText: _hiddenPass,
-                                  validator: (String? stringValue) {
-                                    if (stringValue != null &&
-                                        stringValue.length < 8) {
-                                      return "Please enter a password at least 8 character long password";
-                                    }
-                                    return null;
-                                  },
+                                DropdownButtonFormField(
+                                  items: groupTypes.map(buildMenuItem).toList(),
+                                  onChanged: (value) => setState(
+                                      () => this.groupType = groupType),
                                 ),
                               ],
                             ),
@@ -182,34 +174,10 @@ class _LogInScreenState extends State<LogInScreen> {
                                             setState(() {
                                               isLoading = true;
                                             });
-                                            loginToFirebase();
                                           }
                                         },
                                       ),
                                     ),
-                            ),
-                            SizedBox(height: screenHeight(context) * 0.03),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                RichText(
-                                  text: TextSpan(
-                                    style: GoogleFonts.workSans(
-                                        color: textColor, fontSize: 13),
-                                    text: 'No account?  ',
-                                    children: [
-                                      TextSpan(
-                                          recognizer: TapGestureRecognizer()
-                                            ..onTap = widget.onClickedSignUp,
-                                          text: 'Register Here',
-                                          style: GoogleFonts.workSans(
-                                            fontWeight: FontWeight.bold,
-                                            color: primaryColor,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                              ],
                             ),
                           ]),
                         ),
@@ -217,20 +185,17 @@ class _LogInScreenState extends State<LogInScreen> {
                     ]))))));
   }
 
+  DropdownMenuItem<String> buildMenuItem(String groupType) => DropdownMenuItem(
+        value: groupType,
+        child: Text(
+          groupType,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      );
+
   void _passwordVisible() {
     setState(() {
       _hiddenPass = !_hiddenPass;
-    });
-  }
-
-  void loginToFirebase() {
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .then((result) {
-      isLoading = false;
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
     });
   }
 }

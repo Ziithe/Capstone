@@ -29,11 +29,14 @@ dependencies:
   flutter_svg: ^1.0.3
   google_fonts: ^2.3.1
   flutter_native_splash: ^2.1.2+1
+  clipboard: ^0.1.3
 
 
 flutter_native_splash:
-  image: assets/Images/splashLogo.png
+  image: assets/Images/SplashIcon.png
   color: "2B92D5"
+  android: true
+  ios: true
 
 
 dev_dependencies:
@@ -73,3 +76,5 @@ flutter:
     - assets/Images/Welcome.png
     - assets/Images/blue_Logo.png
     - assets/Images/WBG_Icon.png
+    - assets/Images/noGroups.svg
+    - assets/Images/Process.svg

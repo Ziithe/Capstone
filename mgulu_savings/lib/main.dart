@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mgulu_savings/Entry/verifyEmail.dart';
 import 'package:mgulu_savings/Screens/home.dart';
 import 'package:mgulu_savings/Welcome/welcome.dart';
-import 'package:mgulu_savings/constants.dart';
+import 'package:mgulu_savings/constants/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.removeAfter(initialization);
   await Firebase.initializeApp();
 
   runApp(MyApp());
@@ -33,6 +36,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
+Future initialization(BuildContext? context) async {
+  await Future.delayed(Duration(seconds: 3));
+}
+
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -46,7 +53,7 @@ class MainPage extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(child: Text('Something went wrong!'));
           } else if (snapshot.hasData) {
-            return HomePage();
+            return emailVerification();
           } else {
             return WelcomeScreen();
           }

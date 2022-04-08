@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mgulu_savings/constants.dart';
+import 'package:mgulu_savings/constants/constants.dart';
 
 class Utils {
   static final messengerKey = GlobalKey<ScaffoldMessengerState>();

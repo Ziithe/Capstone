@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mgulu_savings/Welcome/auth_page.dart';
+import 'package:mgulu_savings/management/auth_page.dart';
 
-import '../constants.dart';
-import '../size.dart';
+import '../constants/constants.dart';
+import '../constants/size.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final navigatorKey = GlobalKey<NavigatorState>();

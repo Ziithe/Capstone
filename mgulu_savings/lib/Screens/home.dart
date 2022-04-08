@@ -3,8 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Entry/logIn.dart';
+import 'package:mgulu_savings/Screens/Pages/body.dart';
+import 'package:mgulu_savings/Screens/Pages/groups.dart';
+import 'package:mgulu_savings/Screens/Pages/notifications.dart';
+import 'package:mgulu_savings/Screens/Pages/profile.dart';
 import 'package:mgulu_savings/Welcome/welcome.dart';
-import 'package:mgulu_savings/constants.dart';
+import 'package:mgulu_savings/constants/constants.dart';
+import 'package:mgulu_savings/constants/size.dart';
 
 class HomePage extends StatefulWidget {
   final String? uid;
@@ -23,17 +28,34 @@ class _HomePageState extends State<HomePage> {
         .doc(currentUser!.uid);
   }
 
+  int index = 0;
+  final screens = [Body(), GroupPage(), Notifications(), Profile()];
+
   FirebaseAuth authUser = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: primaryColor),
-      ),
-      drawer: Drawer(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: primaryColor),
+          title: Image.asset("assets/Images/WBG_Icon.png",
+              fit: BoxFit.contain, height: 26.0, width: 26.0),
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: const Icon(Icons.settings),
+                tooltip: 'Open Settings',
+                onPressed: () {}),
+          ]),
+      drawer: buildDrawer(),
+      body: screens[index],
+      bottomNavigationBar: buildNavigationBar(),
+    );
+  }
+
+  Widget buildDrawer() => Drawer(
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
@@ -148,7 +170,45 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
+      );
+
+  Widget buildNavigationBar() => NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: MaterialStateProperty.all(
+              GoogleFonts.workSans(fontSize: 14, fontWeight: FontWeight.w500)),
+          indicatorColor: Colors.blue.shade100,
+        ),
+        child: NavigationBar(
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          height: screenHeight(context) * 0.08,
+          backgroundColor: Colors.white,
+
+          selectedIndex: index,
+          onDestinationSelected: (index) => setState(() => this.index = index),
+          // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+          // animationDuration: Duration(seconds: 3),
+          destinations: [
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.group_outlined),
+              selectedIcon: Icon(Icons.group),
+              label: 'Groups',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.mail_outline_rounded),
+              selectedIcon: Icon(Icons.mail_rounded),
+              label: 'Notifications',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.person_outline_rounded),
+              selectedIcon: Icon(Icons.person_rounded),
+              label: 'Profile',
+            ),
+          ],
+        ),
+      );
 }
