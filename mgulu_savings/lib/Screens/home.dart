@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// ignore: unused_import
 import 'package:mgulu_savings/Entry/logIn.dart';
 import 'package:mgulu_savings/Screens/Pages/body.dart';
 import 'package:mgulu_savings/Screens/Pages/groups.dart';
@@ -21,12 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var currentUser = FirebaseAuth.instance.currentUser;
-  Future getUser() async {
-    var currentUser = await FirebaseAuth.instance.currentUser;
-    var firebaseUser = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(currentUser!.uid);
-  }
+  Future getUser() async {}
 
   int index = 0;
   final screens = [Body(), GroupPage(), Notifications(), Profile()];

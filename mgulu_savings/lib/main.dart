@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Entry/verifyEmail.dart';
-import 'package:mgulu_savings/Screens/home.dart';
 import 'package:mgulu_savings/Welcome/welcome.dart';
 import 'package:mgulu_savings/constants/constants.dart';
 import 'package:firebase_core/firebase_core.dart';

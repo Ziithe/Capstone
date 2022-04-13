@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+var currentUser = FirebaseAuth.instance.currentUser;
 
 class CardModel {
   String groupName;
@@ -17,6 +19,8 @@ class CardModel {
     required this.groupCode,
   });
 }
+
+final groupIds = [];
 
 List<CardModel> myCards = [
   CardModel(

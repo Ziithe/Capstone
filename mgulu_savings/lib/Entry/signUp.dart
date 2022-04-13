@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Entry/verifyEmail.dart';
 import 'package:mgulu_savings/constants/utils.dart';
 import 'package:mgulu_savings/management/userclass.dart';
+// ignore: unused_import
 import 'package:mgulu_savings/Screens/home.dart';
 import 'package:mgulu_savings/constants/constants.dart';
 
@@ -106,8 +107,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   contentPadding: EdgeInsets.symmetric(
                                       vertical: 0, horizontal: 10),
                                   filled: true,
-                                  enabledBorder: InputBorder.none,
-                                  border: InputBorder.none),
+                                  border: const OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  )),
                             ),
                           ],
                         ),
@@ -145,8 +149,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   contentPadding: EdgeInsets.symmetric(
                                       vertical: 0, horizontal: 10),
                                   filled: true,
-                                  enabledBorder: InputBorder.none,
-                                  border: InputBorder.none),
+                                  border: const OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  )),
                             ),
                           ],
                         ),
@@ -173,8 +180,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   contentPadding: EdgeInsets.symmetric(
                                       vertical: 0, horizontal: 10),
                                   filled: true,
-                                  enabledBorder: InputBorder.none,
-                                  border: InputBorder.none),
+                                  border: const OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                  )),
                             ),
                           ],
                         ),
@@ -216,8 +226,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 filled: true,
                                 contentPadding: EdgeInsets.symmetric(
                                     vertical: 0, horizontal: 10),
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
+                                border: const OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(8)),
+                                ),
                               ),
                               controller: passwordController,
                               cursorColor: textColor,
@@ -312,7 +325,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   isLoading = false,
                   postUserDetailsToFirestore(),
                 });
-      } on Exception catch (e) {
+      } on Exception {
         Utils.showSnackBar("Email already registered");
       }
     }

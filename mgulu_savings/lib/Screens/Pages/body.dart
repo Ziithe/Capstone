@@ -1,10 +1,11 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Screens/Pages/activityCard.dart';
 import 'package:mgulu_savings/Screens/Pages/card.dart';
-import 'package:mgulu_savings/constants/constants.dart';
 import 'package:mgulu_savings/constants/size.dart';
 import 'package:mgulu_savings/data/activity_data.dart';
 import 'package:mgulu_savings/data/card_data.dart';
@@ -19,6 +20,15 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   var currentUser = FirebaseAuth.instance.currentUser;
+
+  // final groups = FirebaseFirestore.instance
+  //     .collection("Users")
+  //     .doc(currentUser!.uid)
+  //     .get()
+  //     .then((value) {
+  //   myGroups = value.data()!['groupId'];
+  //   print(myGroups);
+  // });
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +52,45 @@ class _BodyState extends State<Body> {
           );
         } else {
           throw Error;
+        }
+      },
+    );
+
+    // final groups = FirebaseFirestore.instance
+    //     .collection("Users")
+    //     .doc(currentUser!.uid)
+    //     .get()
+    //     .then((value) {
+    //   myGroups = value.data()!['groupId'];
+    //   print(myGroups);
+    // });
+
+    // late List<dynamic> myGroups;
+    // final groups = FirebaseFirestore.instance
+    //     .collection("users")
+    //     .doc(currentUser!.uid)
+    //     .get();
+
+    final userGroups = FutureBuilder<DocumentSnapshot>(
+      future: FirebaseFirestore.instance
+          .collection("users")
+          .doc(currentUser!.uid)
+          .get(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        }
+        if (snapshot.hasError) {
+          return Text("Error");
+        }
+        if (snapshot.hasData) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          final str = '${data['groupId']}';
+          return Text(str);
+        } else {
+          throw Error();
         }
       },
     );
@@ -82,6 +131,14 @@ class _BodyState extends State<Body> {
               SizedBox(
                 height: screenHeight(context) * 0.03,
               ),
+              Text("Your Groups"),
+              userGroups,
+
+              // ListView.builder(
+              //     itemCount: myGroups.length,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return Text(myGroups[index]);
+              //     }),
               Row(
                 children: [
                   Text(

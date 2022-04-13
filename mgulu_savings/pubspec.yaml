@@ -24,7 +24,12 @@ dependencies:
   # Validate Email
   email_validator: ^2.0.1
 
+  #Currency Formatter
+  currency_text_input_formatter: ^2.1.5
 
+  #datepicker
+  date_time_picker: ^2.1.0
+  
   cupertino_icons: ^1.0.2
   flutter_svg: ^1.0.3
   google_fonts: ^2.3.1

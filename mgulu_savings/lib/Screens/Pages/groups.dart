@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Screens/Pages/createGroup.dart';
+import 'package:mgulu_savings/Screens/Pages/joinGroup.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/size.dart';
@@ -19,12 +20,7 @@ class GroupPage extends StatefulWidget {
 class _GroupPageState extends State<GroupPage> {
   var currentUser = FirebaseAuth.instance.currentUser;
 
-  Future getUserGroupStat() async {
-    var currentUser = await FirebaseAuth.instance.currentUser;
-    var firebaseUser = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(currentUser!.uid);
-  }
+  Future getUserGroupStat() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +42,7 @@ class _GroupPageState extends State<GroupPage> {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
             var groupStatus = Text('${data['groupId']}');
+            // ignore: unnecessary_null_comparison
             if (groupStatus != null) {
               return Container(
                 child: SizedBox(
@@ -110,7 +107,13 @@ class _GroupPageState extends State<GroupPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10))),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        joinGroup()));
+                                          },
                                           child: Text(
                                             "Join a Group",
                                             style: GoogleFonts.workSans(

@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 class UserClass {
   String? uid;
   String? fullname;
   String? passid;
   String? email;
-  String? groupId;
+  List? groupId;
 
   UserClass({this.email, this.fullname, this.passid, this.uid, this.groupId});
 

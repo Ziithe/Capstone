@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ActivityModel {
   String activityName;
   String amount;

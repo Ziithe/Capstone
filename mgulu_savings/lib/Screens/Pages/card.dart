@@ -1,15 +1,22 @@
-import 'dart:ui';
-
 import 'package:clipboard/clipboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mgulu_savings/constants/constants.dart';
 import 'package:mgulu_savings/data/card_data.dart';
 
 import '../../constants/size.dart';
 
-class MyCard extends StatelessWidget {
+class MyCard extends StatefulWidget {
+  final String? uid;
   final CardModel card;
-  const MyCard({Key? key, required this.card}) : super(key: key);
+  const MyCard({Key? key, required this.card, this.uid}) : super(key: key);
+
+  @override
+  State<MyCard> createState() => _MyCardState();
+}
+
+class _MyCardState extends State<MyCard> {
+  var currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +45,13 @@ class MyCard extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 6.0),
                               child: Text(
-                                card.groupName,
+                                widget.card.groupName,
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                             ),
                             Text(
-                              card.groupType,
+                              widget.card.groupType,
                               style:
                                   TextStyle(color: textSecondary, fontSize: 13),
                             ),
@@ -60,7 +67,7 @@ class MyCard extends StatelessWidget {
                               style:
                                   TextStyle(color: textSecondary, fontSize: 11),
                             ),
-                            Text(card.memberCount),
+                            Text(widget.card.memberCount),
                           ],
                         )
                       ],
@@ -69,7 +76,7 @@ class MyCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          card.groupGoal,
+                          widget.card.groupGoal,
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
                         ),
@@ -77,10 +84,11 @@ class MyCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Text(card.groupCode),
+                        Text(widget.card.groupCode),
                         IconButton(
                             onPressed: () async {
-                              await FlutterClipboard.copy(card.groupCode);
+                              await FlutterClipboard.copy(
+                                  widget.card.groupCode);
                             },
                             icon: Icon(Icons.copy_rounded))
                       ],

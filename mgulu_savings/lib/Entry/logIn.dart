@@ -5,9 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Screens/home.dart';
 
 import '../constants/constants.dart';
-import '../main.dart';
 import '../constants/size.dart';
-import '../constants/utils.dart';
 
 class LogInScreen extends StatefulWidget {
   final VoidCallback onClickedSignUp;
@@ -106,8 +104,11 @@ class _LogInScreenState extends State<LogInScreen> {
                                       contentPadding: EdgeInsets.symmetric(
                                           vertical: 0, horizontal: 10),
                                       filled: true,
-                                      enabledBorder: InputBorder.none,
-                                      border: InputBorder.none),
+                                      border: const OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                      )),
                                 ),
                               ],
                             ),
@@ -127,17 +128,19 @@ class _LogInScreenState extends State<LogInScreen> {
                                         vertical: 6, horizontal: 0)),
                                 TextFormField(
                                   decoration: InputDecoration(
-                                    suffix: InkWell(
-                                      onTap: _passwordVisible,
-                                      child:
-                                          const Icon(Icons.visibility_outlined),
-                                    ),
-                                    filled: true,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        vertical: 0, horizontal: 10),
-                                    border: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                  ),
+                                      suffix: InkWell(
+                                        onTap: _passwordVisible,
+                                        child: const Icon(
+                                            Icons.visibility_outlined),
+                                      ),
+                                      filled: true,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 0, horizontal: 10),
+                                      border: const OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                      )),
                                   controller: passwordController,
                                   cursorColor: textColor,
                                   obscureText: _hiddenPass,

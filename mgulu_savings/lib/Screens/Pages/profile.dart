@@ -12,7 +12,6 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth authUser = FirebaseAuth.instance;
     var currentUser = FirebaseAuth.instance.currentUser;
 
     return SafeArea(
@@ -68,7 +67,7 @@ class Profile extends StatelessWidget {
                 title: FutureBuilder<DocumentSnapshot>(
                   future: FirebaseFirestore.instance
                       .collection("users")
-                      .doc(currentUser!.uid)
+                      .doc(currentUser.uid)
                       .get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -93,7 +92,7 @@ class Profile extends StatelessWidget {
                 title: FutureBuilder<DocumentSnapshot>(
                   future: FirebaseFirestore.instance
                       .collection("users")
-                      .doc(currentUser!.uid)
+                      .doc(currentUser.uid)
                       .get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -118,7 +117,7 @@ class Profile extends StatelessWidget {
                 title: FutureBuilder<DocumentSnapshot>(
                   future: FirebaseFirestore.instance
                       .collection("users")
-                      .doc(currentUser!.uid)
+                      .doc(currentUser.uid)
                       .get(),
                   builder: (BuildContext context,
                       AsyncSnapshot<DocumentSnapshot> snapshot) {
