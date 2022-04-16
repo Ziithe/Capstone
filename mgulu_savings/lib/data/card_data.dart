@@ -19,24 +19,3 @@ class CardModel {
     required this.groupCode,
   });
 }
-
-final groupIds = [];
-
-List<CardModel> myCards = [
-  CardModel(
-    groupName: "Banda Family",
-    groupType: "Chipeleganyu",
-    members: "Members",
-    memberCount: "5/10",
-    groupGoal: "MWK 25,000",
-    groupCode: "JOIN56z28Y",
-  ),
-  CardModel(
-    groupName: "Banda Family",
-    groupType: "Chipeleganyu",
-    members: "Members",
-    memberCount: "5/10",
-    groupGoal: "MWK 25,000",
-    groupCode: "JOIN56z28Y",
-  ),
-];

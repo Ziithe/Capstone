@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mgulu_savings/Screens/Pages/recentActivity.dart';
 import 'package:mgulu_savings/constants/constants.dart';
-import 'package:mgulu_savings/data/activity_data.dart';
+import 'package:mgulu_savings/constants/size.dart';
 
 class activityCard extends StatelessWidget {
-  final ActivityModel activity;
+  final Activity activity;
   const activityCard({Key? key, required this.activity}) : super(key: key);
 
   @override
@@ -12,7 +13,7 @@ class activityCard extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.white10)),
+          border: Border.all(color: Colors.white)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -20,7 +21,7 @@ class activityCard extends StatelessWidget {
             children: [
               Container(
                 child: Icon(
-                  Icons.send_to_mobile_rounded,
+                  Icons.timer_rounded,
                   color: primaryColor,
                 ),
               ),
@@ -31,40 +32,27 @@ class activityCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 2.0),
-                    child: Text(
-                      activity.activityName,
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                  ),
                   Row(
-                    children: [
-                      Text(activity.date + ", ",
-                          style: TextStyle(color: textSecondary, fontSize: 13)),
-                      Text(activity.time,
-                          style: TextStyle(color: textSecondary, fontSize: 13)),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(activity.amount,
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        activity.status,
-                        style: TextStyle(color: successColor, fontSize: 11),
+                        activity.details.toString(),
+                        style: TextStyle(fontWeight: FontWeight.w600),
                       ),
+                      SizedBox(
+                        width: screenWidth(context) * 0.25,
+                      ),
+                      Text(activity.comment.toString(),
+                          style: TextStyle(fontSize: 13, color: successColor)),
+                    ],
+                  ),
+                  SizedBox(
+                    height: screenHeight(context) * 0.01,
+                  ),
+                  Row(
+                    children: [
+                      Text((activity.date!.toDate()).toString(),
+                          style: TextStyle(color: textSecondary, fontSize: 13)),
                     ],
                   ),
                 ],

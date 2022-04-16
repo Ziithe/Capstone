@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class groupsClass {
   String groupId;
   String groupName;
@@ -10,18 +8,16 @@ class groupsClass {
   String frequency;
   String startDate;
   String endDate;
-  List<String> members;
-  Timestamp groupCreated;
+  List<dynamic> members;
 
   groupsClass(
-      this.admin,
-      this.frequency,
-      this.groupCreated,
-      this.groupGoal,
       this.groupId,
-      this.groupLimit,
       this.groupName,
+      this.admin,
+      this.groupLimit,
       this.groupType,
+      this.groupGoal,
+      this.frequency,
       this.startDate,
       this.endDate,
       this.members);

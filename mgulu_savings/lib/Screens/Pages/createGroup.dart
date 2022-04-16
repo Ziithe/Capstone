@@ -41,8 +41,8 @@ class _createGroupState extends State<createGroup> {
   }
 
   final groupTypes = [
-    'Savings and Loan Group (Gulu)',
-    'Rotational Savings Group (Chipeleganyu)',
+    'Savings and Loan Group',
+    'Rotational Savings Group',
   ];
 
   final frequencies = ['Daily', 'Weekly', 'Monthly'];
@@ -73,7 +73,9 @@ class _createGroupState extends State<createGroup> {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_rounded),
               tooltip: 'Back',
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.pop(context, true);
+              }),
         ),
         body: SafeArea(
             child: SizedBox(
@@ -401,7 +403,6 @@ class _createGroupState extends State<createGroup> {
 
   void createGroup(String groupName, String uid) async {
     List<String> members = [];
-    List<String> groupId = [];
 
     try {
       members.add(uid);
@@ -418,10 +419,26 @@ class _createGroupState extends State<createGroup> {
         'groupCreated': Timestamp.now(),
       });
 
-      groupId.add(_docRef.id);
-      await _firestore.collection("users").doc(uid).update({
-        'groupId': FieldValue.arrayUnion(groupId),
+      await _firestore.collection("users").doc(uid).collection("myGroups").add({
+        'groupId': _docRef.id,
+        'groupName': groupNameController.text,
+        'admin': uid,
+        'members': members,
+        'goal': groupGoalController.text,
+        'limit': groupLimitController.text,
+        'startOn': startDateController.text,
+        'endOn': endDateController.text,
+        'frequency': frq.toString(),
+        'groupType': groupType.toString(),
+        'groupCreated': Timestamp.now(),
       });
+
+      await _firestore.collection("users").doc(uid).collection("Activity").add({
+        'comment': 'Success',
+        'details': 'Created Group - ' + groupNameController.text,
+        'date': Timestamp.now(),
+      });
+
       Navigator.push(
           context,
           MaterialPageRoute(

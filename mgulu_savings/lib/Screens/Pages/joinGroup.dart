@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mgulu_savings/Screens/home.dart';
 
@@ -26,6 +27,7 @@ class _joinGroupState extends State<joinGroup> {
   }
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,9 @@ class _joinGroupState extends State<joinGroup> {
           leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_rounded),
               tooltip: 'Back',
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.pop(context, true);
+              }),
         ),
         body: SafeArea(
             child: SizedBox(
@@ -122,9 +126,15 @@ class _joinGroupState extends State<joinGroup> {
                                       ),
                                       onPressed: () {
                                         if (_formKey.currentState!.validate()) {
-                                          setState(() {
-                                            isLoading = true;
-                                          });
+                                          try {
+                                            setState(() {
+                                              isLoading = true;
+                                            });
+                                            joinGroup(groupIdController.text,
+                                                user.uid);
+                                          } catch (e) {
+                                            throw Error();
+                                          }
                                         }
                                       },
                                     ),
@@ -136,22 +146,37 @@ class _joinGroupState extends State<joinGroup> {
   }
 
   void joinGroup(String groupId, String uid) async {
+    DocumentSnapshot groupData = await FirebaseFirestore.instance
+        .collection("groups")
+        .doc(groupIdController.text)
+        .get();
+
     List<String> members = [];
-    List<String> groupId = [];
 
     try {
       members.add(uid);
-      await _firestore
-          .collection("groups")
-          .doc(groupIdController.toString())
-          .update({
+      await _firestore.collection("groups").doc(groupIdController.text).update({
         'members': FieldValue.arrayUnion(members),
       });
-
-      groupId.add(groupIdController.toString());
-      await _firestore.collection("users").doc(uid).update({
-        'groupId': FieldValue.arrayUnion(groupId),
+      await _firestore.collection("users").doc(uid).collection("myGroups").add({
+        'groupId': groupIdController.text,
+        'groupName': groupData.get('groupName'),
+        'admin': groupData.get('admin'),
+        'members': groupData.get("members"),
+        'goal': groupData.get('goal'),
+        'limit': groupData.get('limit'),
+        'startOn': groupData.get('startOn'),
+        'endOn': groupData.get('endOn'),
+        'frequency': groupData.get('frequency'),
+        'groupType': groupData.get('groupType'),
+        'createdOn': groupData.get('createdOn'),
       });
+      await _firestore.collection("users").doc(uid).collection("Activity").add({
+        'comment': 'Success',
+        'details': 'Joined Group - ' + groupData.get('groupName'),
+        'date': Timestamp.now(),
+      });
+
       Navigator.push(
           context,
           MaterialPageRoute(
