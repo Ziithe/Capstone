@@ -167,6 +167,7 @@ class _joinGroupState extends State<joinGroup> {
         'limit': groupData.get('limit'),
         'startOn': groupData.get('startOn'),
         'endOn': groupData.get('endOn'),
+        "activeBalance": groupData.get('activeBalance'),
         'frequency': groupData.get('frequency'),
         'groupType': groupData.get('groupType'),
         'createdOn': groupData.get('createdOn'),

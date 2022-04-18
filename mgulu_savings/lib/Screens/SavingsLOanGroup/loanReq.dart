@@ -98,7 +98,7 @@ class _requestLoanState extends State<requestLoan> {
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: primaryColor),
+        iconTheme: IconThemeData(color: textColor),
         title: Text('Request Loan',
             style: GoogleFonts.workSans(
                 fontSize: 20, fontWeight: FontWeight.w700, color: textColor)),
@@ -175,7 +175,7 @@ class _requestLoanState extends State<requestLoan> {
                             cursorColor: textColor,
                             inputFormatters: [
                               CurrencyTextInputFormatter(
-                                name: 'MWK ',
+                                name: 'RWF',
                               )
                             ],
                             keyboardType: TextInputType.number,

@@ -177,7 +177,7 @@ class _createGroupState extends State<createGroup> {
                                 cursorColor: textColor,
                                 inputFormatters: [
                                   CurrencyTextInputFormatter(
-                                    name: 'MWK',
+                                    name: 'RWF',
                                   )
                                 ],
                                 keyboardType: TextInputType.number,
@@ -414,6 +414,7 @@ class _createGroupState extends State<createGroup> {
         'limit': groupLimitController.text,
         'startOn': startDateController.text,
         'endOn': endDateController.text,
+        "activeBalance": 0,
         'frequency': frq.toString(),
         'groupType': groupType.toString(),
         'groupCreated': Timestamp.now(),
@@ -428,6 +429,7 @@ class _createGroupState extends State<createGroup> {
         'limit': groupLimitController.text,
         'startOn': startDateController.text,
         'endOn': endDateController.text,
+        "activeBalance": 0,
         'frequency': frq.toString(),
         'groupType': groupType.toString(),
         'groupCreated': Timestamp.now(),

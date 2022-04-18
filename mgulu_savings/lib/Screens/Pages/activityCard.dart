@@ -40,7 +40,7 @@ class activityCard extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
-                        width: screenWidth(context) * 0.25,
+                        width: screenWidth(context) * 0.2,
                       ),
                       Text(activity.comment.toString(),
                           style: TextStyle(fontSize: 13, color: successColor)),

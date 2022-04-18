@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mgulu_savings/Screens/SavingsLOanGroup/groupLoans.dart';
+import 'package:mgulu_savings/Screens/SavingsLOanGroup/groupTransactions.dart';
+import 'package:mgulu_savings/constants/operationsCard.dart';
 import 'package:mgulu_savings/constants/servicesButton.dart';
 import 'package:mgulu_savings/Screens/SavingsLOanGroup/loanReq.dart';
 import 'package:mgulu_savings/Screens/SavingsLOanGroup/sendMoney.dart';
@@ -48,10 +51,12 @@ class _SLGroupInfoState extends State<SLGroupInfo> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: textColor,
+          ),
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: primaryColor),
         title: Text(groupName,
             style: GoogleFonts.workSans(
                 fontSize: 20, fontWeight: FontWeight.w700, color: textColor)),
@@ -223,9 +228,93 @@ class _SLGroupInfoState extends State<SLGroupInfo> {
                 Row(
                   children: [
                     Text(
-                      "Recent Transactions",
+                      "Group Operations",
                       style: GoogleFonts.workSans(
                           fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenHeight(context) * 0.03,
+                ),
+                Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    groupTransactions(groupId: groupId)));
+                      },
+                      child: operationsCard(
+                          iconPath: "assets/Images/transaction.png",
+                          titleText: "Group Transactions",
+                          subTitle: "View all Group Transactions"),
+                    ),
+                    SizedBox(
+                      height: screenHeight(context) * 0.02,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    groupLoans(groupId: groupId)));
+                      },
+                      child: operationsCard(
+                          iconPath: "assets/Images/loan.png",
+                          titleText: "Group Loans",
+                          subTitle: "View all Group Loans"),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenHeight(context) * 0.03,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Your Operations",
+                      style: GoogleFonts.workSans(
+                          fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenHeight(context) * 0.03,
+                ),
+                Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             ));
+                      },
+                      child: operationsCard(
+                          iconPath: "assets/Images/credit-card.png",
+                          titleText: "Your Transactions",
+                          subTitle: "View all your Transactions in this Group"),
+                    ),
+                    SizedBox(
+                      height: screenHeight(context) * 0.02,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) =>
+                        //             ));
+                      },
+                      child: operationsCard(
+                          iconPath: "assets/Images/myloan.png",
+                          titleText: "Your Loans",
+                          subTitle: "View all your loans in this Group"),
                     ),
                   ],
                 ),
