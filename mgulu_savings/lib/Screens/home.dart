@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: primaryColor),
+          iconTheme: IconThemeData(color: textColor),
           title: Image.asset("assets/Images/WBG_Icon.png",
               fit: BoxFit.contain, height: 26.0, width: 26.0),
           centerTitle: true,
@@ -143,7 +143,55 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               leading: IconButton(
-                icon: const Icon(Icons.logout),
+                icon: const Icon(
+                  Icons.person_outline_rounded,
+                  color: primaryColor,
+                ),
+                onPressed: () {},
+              ),
+              title: const Text(
+                "My Profile",
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: IconButton(
+                  icon: const Icon(
+                    Icons.people_outline_rounded,
+                    color: primaryColor,
+                  ),
+                  onPressed: () {}),
+              title: const Text(
+                "My Groups",
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: IconButton(
+                  icon: const Icon(
+                    Icons.chat_bubble_rounded,
+                    color: primaryColor,
+                  ),
+                  onPressed: () {}),
+              title: const Text(
+                "My Activities",
+              ),
+              onTap: () {},
+            ),
+            SizedBox(
+              height: screenHeight(context) * 0.3,
+            ),
+            Divider(
+              color: Colors.grey,
+              height: 10,
+              thickness: 1,
+            ),
+            ListTile(
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  color: primaryColor,
+                ),
                 onPressed: () => authUser.signOut().then((res) {
                   Navigator.pushAndRemoveUntil(
                       context,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mgulu_savings/Screens/SavingsLOanGroup/groupLoans.dart';
 import 'package:mgulu_savings/Screens/SavingsLOanGroup/groupTransactions.dart';
+import 'package:mgulu_savings/Screens/SavingsLOanGroup/yourLoans.dart';
+import 'package:mgulu_savings/Screens/SavingsLOanGroup/yourTransactions.dart';
 import 'package:mgulu_savings/constants/operationsCard.dart';
 import 'package:mgulu_savings/constants/servicesButton.dart';
 import 'package:mgulu_savings/Screens/SavingsLOanGroup/loanReq.dart';
@@ -289,11 +291,11 @@ class _SLGroupInfoState extends State<SLGroupInfo> {
                   children: [
                     InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    yourTransactions(groupId: groupId)));
                       },
                       child: operationsCard(
                           iconPath: "assets/Images/credit-card.png",
@@ -305,11 +307,12 @@ class _SLGroupInfoState extends State<SLGroupInfo> {
                     ),
                     InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => myLoans(
+                                      groupId: groupId,
+                                    )));
                       },
                       child: operationsCard(
                           iconPath: "assets/Images/myloan.png",

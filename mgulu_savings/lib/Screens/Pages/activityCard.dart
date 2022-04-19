@@ -21,8 +21,9 @@ class activityCard extends StatelessWidget {
             children: [
               Container(
                 child: Icon(
-                  Icons.timer_rounded,
+                  Icons.access_time_rounded,
                   color: primaryColor,
+                  size: 30,
                 ),
               ),
               SizedBox(
@@ -33,17 +34,12 @@ class activityCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         activity.details.toString(),
                         style: TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
-                        width: screenWidth(context) * 0.2,
-                      ),
-                      Text(activity.comment.toString(),
-                          style: TextStyle(fontSize: 13, color: successColor)),
                     ],
                   ),
                   SizedBox(
@@ -54,6 +50,9 @@ class activityCard extends StatelessWidget {
                       Text((activity.date!.toDate()).toString(),
                           style: TextStyle(color: textSecondary, fontSize: 13)),
                     ],
+                  ),
+                  SizedBox(
+                    height: screenHeight(context) * 0.01,
                   ),
                 ],
               ),

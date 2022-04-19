@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mgulu_savings/Screens/Pages/activityCard.dart';
-import 'package:mgulu_savings/Screens/Pages/recentActivity.dart';
+import 'package:mgulu_savings/Screens/Pages/transCard.dart';
+import 'package:mgulu_savings/Screens/Pages/transactions.dart';
 
 import '../../constants/constants.dart';
 import '../../constants/size.dart';
@@ -69,8 +69,9 @@ class _groupTransactionsState extends State<groupTransactions> {
                       },
                       itemCount: _transactionList.length,
                       itemBuilder: (context, index) {
-                        return activityCard(
-                            activity: _transactionList[index] as Activity);
+                        return transCard(
+                            transaction:
+                                _transactionList[index] as groupTransaction);
                       })
                 ],
               ),
@@ -88,13 +89,13 @@ class _groupTransactionsState extends State<groupTransactions> {
     var data = await _firestore
         .collection('groups')
         .doc(groupId)
-        .collection('transactions')
-        .orderBy('date', descending: true)
+        .collection('groupTransactions')
+        .orderBy('sendDate', descending: true)
         .get();
 
     setState(() {
       _transactionList =
-          List.from(data.docs.map((doc) => Activity.fromSnapshot(doc)));
+          List.from(data.docs.map((doc) => groupTransaction.fromSnapshot(doc)));
     });
   }
 }

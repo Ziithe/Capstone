@@ -4,9 +4,9 @@ import 'package:mgulu_savings/Screens/SavingsLOanGroup/loanData.dart';
 import 'package:mgulu_savings/constants/constants.dart';
 import 'package:mgulu_savings/constants/size.dart';
 
-class loanCard extends StatelessWidget {
+class myLoanCard extends StatelessWidget {
   final loanRequests loan;
-  const loanCard({Key? key, required this.loan}) : super(key: key);
+  const myLoanCard({Key? key, required this.loan}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +25,7 @@ class loanCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Request From: ",
-                style: GoogleFonts.workSans(
-                    fontWeight: FontWeight.w600, color: textColor),
-              ),
-              Text(loan.requestFrom.toString())
-            ],
-          ),
-          SizedBox(
-            height: screenHeight(context) * 0.005,
-          ),
-          Row(
-            children: [
-              Text(
-                "Amount: ",
+                "Amount Requested: ",
                 style: GoogleFonts.workSans(fontWeight: FontWeight.w600),
               ),
               Text(loan.amount.toString())

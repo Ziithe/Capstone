@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mgulu_savings/Screens/SavingsLOanGroup/loanData.dart';
+import 'package:mgulu_savings/Screens/Pages/transactions.dart';
 import 'package:mgulu_savings/constants/constants.dart';
-import 'package:mgulu_savings/constants/size.dart';
 
-class loanCard extends StatelessWidget {
-  final loanRequests loan;
-  const loanCard({Key? key, required this.loan}) : super(key: key);
+class transCard extends StatelessWidget {
+  final groupTransaction transaction;
+  const transCard({Key? key, required this.transaction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +19,16 @@ class loanCard extends StatelessWidget {
                 color: Colors.grey.shade200, blurRadius: 20, spreadRadius: 2)
           ]),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               Text(
-                "Request From: ",
+                "Sender: ",
                 style: GoogleFonts.workSans(
                     fontWeight: FontWeight.w600, color: textColor),
               ),
-              Text(loan.requestFrom.toString())
+              Text(transaction.senderName.toString())
             ],
-          ),
-          SizedBox(
-            height: screenHeight(context) * 0.005,
           ),
           Row(
             children: [
@@ -41,34 +36,16 @@ class loanCard extends StatelessWidget {
                 "Amount: ",
                 style: GoogleFonts.workSans(fontWeight: FontWeight.w600),
               ),
-              Text(loan.amount.toString())
+              Text("RWF " + transaction.amount.toString())
             ],
-          ),
-          SizedBox(
-            height: screenHeight(context) * 0.005,
           ),
           Row(
             children: [
               Text(
-                "Due Date: ",
+                "Date: ",
                 style: GoogleFonts.workSans(fontWeight: FontWeight.w600),
               ),
-              Text(loan.loanDueDate!.toString())
-            ],
-          ),
-          SizedBox(
-            height: screenHeight(context) * 0.005,
-          ),
-          Row(
-            children: [
-              Text(
-                "Status: ",
-                style: GoogleFonts.workSans(fontWeight: FontWeight.w600),
-              ),
-              Text(
-                loan.status.toString(),
-                style: GoogleFonts.workSans(color: warningColor),
-              )
+              Text(transaction.sendDate!.toDate().toString())
             ],
           ),
         ],

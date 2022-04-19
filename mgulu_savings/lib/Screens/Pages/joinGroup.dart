@@ -35,7 +35,7 @@ class _joinGroupState extends State<joinGroup> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: primaryColor),
+          iconTheme: IconThemeData(color: textColor),
           title: Text(
             "Join Group",
             style: TextStyle(
@@ -167,7 +167,6 @@ class _joinGroupState extends State<joinGroup> {
         'limit': groupData.get('limit'),
         'startOn': groupData.get('startOn'),
         'endOn': groupData.get('endOn'),
-        "activeBalance": groupData.get('activeBalance'),
         'frequency': groupData.get('frequency'),
         'groupType': groupData.get('groupType'),
         'createdOn': groupData.get('createdOn'),

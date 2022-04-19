@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mgulu_savings/Screens/SavingsLoanGroup/groupTransactions.dart';
+import 'package:mgulu_savings/constants/operationsCard.dart';
 import 'package:mgulu_savings/constants/servicesButton.dart';
 import 'package:mgulu_savings/Screens/SavingsLOanGroup/sendMoney.dart';
 import 'package:mgulu_savings/constants/constants.dart';
 import 'package:mgulu_savings/constants/size.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '../SavingsLOanGroup/yourTransactions.dart';
 
 class rotGroupInfo extends StatefulWidget {
   final groupName;
@@ -50,7 +54,7 @@ class _rotGroupInfoState extends State<rotGroupInfo> {
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(color: primaryColor),
+        iconTheme: IconThemeData(color: textColor),
         title: Text(groupName,
             style: GoogleFonts.workSans(
                 fontSize: 20, fontWeight: FontWeight.w700, color: textColor)),
@@ -211,9 +215,45 @@ class _rotGroupInfoState extends State<rotGroupInfo> {
                 Row(
                   children: [
                     Text(
-                      "Recent Transactions",
+                      "Operations",
                       style: GoogleFonts.workSans(
                           fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenHeight(context) * 0.03,
+                ),
+                Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    groupTransactions(groupId: groupId)));
+                      },
+                      child: operationsCard(
+                          iconPath: "assets/Images/transaction.png",
+                          titleText: "Group Transactions",
+                          subTitle: "View all Group Transactions"),
+                    ),
+                    SizedBox(
+                      height: screenHeight(context) * 0.02,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    yourTransactions(groupId: groupId)));
+                      },
+                      child: operationsCard(
+                          iconPath: "assets/Images/credit-card.png",
+                          titleText: "Your Transactions",
+                          subTitle: "View all your Transactions in this Group"),
                     ),
                   ],
                 ),

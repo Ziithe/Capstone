@@ -60,7 +60,7 @@ class _createGroupState extends State<createGroup> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(color: primaryColor),
+          iconTheme: IconThemeData(color: textColor),
           title: Text(
             "Create Group",
             style: TextStyle(
@@ -414,7 +414,6 @@ class _createGroupState extends State<createGroup> {
         'limit': groupLimitController.text,
         'startOn': startDateController.text,
         'endOn': endDateController.text,
-        "activeBalance": 0,
         'frequency': frq.toString(),
         'groupType': groupType.toString(),
         'groupCreated': Timestamp.now(),
@@ -429,7 +428,6 @@ class _createGroupState extends State<createGroup> {
         'limit': groupLimitController.text,
         'startOn': startDateController.text,
         'endOn': endDateController.text,
-        "activeBalance": 0,
         'frequency': frq.toString(),
         'groupType': groupType.toString(),
         'groupCreated': Timestamp.now(),

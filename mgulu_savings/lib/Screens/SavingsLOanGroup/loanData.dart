@@ -4,11 +4,8 @@ class loanRequests {
   String? amount;
   String? loanDueDate;
   String? requestEmail;
-
   String? requestFrom;
-
   String? requestId;
-
   String? status;
   Timestamp? requestDate;
 

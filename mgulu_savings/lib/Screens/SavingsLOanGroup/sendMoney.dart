@@ -62,73 +62,7 @@ class _sendMoneyState extends State<sendMoney> {
   @override
   Widget build(BuildContext context) {
     final String? groupId = this.widget.groupId;
-
-    // final FullName = FutureBuilder<DocumentSnapshot>(
-    //   future: FirebaseFirestore.instance
-    //       .collection("users")
-    //       .doc(currentUser!.uid)
-    //       .get(),
-    //   builder:
-    //       (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return const CircularProgressIndicator();
-    //     }
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       Map<String, dynamic> data =
-    //           snapshot.data!.data() as Map<String, dynamic>;
-    //       return Text(
-    //         '${data['fullname'].toString()}',
-    //         style: GoogleFonts.workSans(fontSize: 13, color: textSecondary),
-    //       );
-    //     } else {
-    //       throw Error;
-    //     }
-    //   },
-    // );
-
-    // final email = FutureBuilder<DocumentSnapshot>(
-    //   future: FirebaseFirestore.instance
-    //       .collection("users")
-    //       .doc(currentUser!.uid)
-    //       .get(),
-    //   builder:
-    //       (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return const CircularProgressIndicator();
-    //     }
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       Map<String, dynamic> data =
-    //           snapshot.data!.data() as Map<String, dynamic>;
-    //       return Text(
-    //         '${data['email'].toString()}',
-    //         style: GoogleFonts.workSans(fontSize: 13, color: textSecondary),
-    //       );
-    //     } else {
-    //       throw Error;
-    //     }
-    //   },
-    // );
-
-    final groupName = FutureBuilder<DocumentSnapshot>(
-      future:
-          FirebaseFirestore.instance.collection("groups").doc(groupId).get(),
-      builder:
-          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-          return Text(
-            '${data['groupName'].toString()}',
-            style: GoogleFonts.workSans(fontSize: 13, color: textSecondary),
-          );
-        } else {
-          throw Error;
-        }
-      },
-    );
+    final String? groupName = this.widget.groupName;
 
     return Scaffold(
       appBar: AppBar(
@@ -170,7 +104,7 @@ class _sendMoneyState extends State<sendMoney> {
                   height: screenHeight(context) * 0.055,
                   width: screenWidth(context),
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                  child: groupName,
+                  child: Text(groupName.toString()),
                   decoration: BoxDecoration(
                       color: Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(10)),
@@ -347,8 +281,8 @@ class _sendMoneyState extends State<sendMoney> {
                                       final email = emailController.text.trim();
                                       final name =
                                           fullnameController.text.trim();
-                                      _makePayment(context, email, name,
-                                          groupId.toString());
+                                      _makePayment(
+                                          context, email, name, groupId!);
                                     }
                                   },
                                 ),
@@ -489,17 +423,13 @@ class _sendMoneyState extends State<sendMoney> {
         'sendDate': Timestamp.now(),
         'senderName': userData.get('fullname'),
         'senderEmail': userData.get('email'),
-        'details': amountController.text +
+        'uid': uid,
+        'details': "RWF " +
+            amountController.text +
             " received from " +
             userData.get("fullname"),
         'comment': "Success"
       });
-      final double amount = double.parse(amountController.text);
-
-      await _firestore
-          .collection("groups")
-          .doc(groupId)
-          .update({'activeBalance': FieldValue.increment(amount)});
 
       //Add infor to users collection
       await _firestore
@@ -511,23 +441,21 @@ class _sendMoneyState extends State<sendMoney> {
           .add({
         'amount': amountController.text,
         'sendDate': Timestamp.now(),
-        'details':
-            amountController.text + " sent to " + groupData.get("groupName"),
+        'details': "RWF " +
+            amountController.text +
+            " sent to " +
+            groupData.get("groupName"),
         'comment': "Success"
       });
-      await _firestore
-          .collection("users")
-          .doc(uid)
-          .collection("myGroups")
-          .doc(groupId)
-          .update({'activeBalance': FieldValue.increment(amount)});
 
       //Add infor to Activities collection
       await _firestore.collection("users").doc(uid).collection("Activity").add({
         'amount': amountController.text,
         'comment': 'Success',
-        'details':
-            amountController.text + " sent to " + groupData.get("groupName"),
+        'details': "RWF " +
+            amountController.text +
+            " sent to " +
+            groupData.get("groupName"),
         'date': Timestamp.now(),
       });
 
