@@ -74,7 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   "Create an Account",
                   style: TextStyle(
                     color: textColor,
-                    fontSize: 28,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -91,7 +91,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text(
                               "Full Name",
                               style: const TextStyle(
-                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: textColor),
                             ),
@@ -122,7 +121,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text(
                               "Email Address",
                               style: const TextStyle(
-                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: textColor),
                             ),
@@ -164,7 +162,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text(
                               "Passport/National ID Number",
                               style: const TextStyle(
-                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: textColor),
                             ),
@@ -210,7 +207,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Text(
                               "Set Password",
                               style: const TextStyle(
-                                  fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   color: textColor),
                             ),
@@ -267,7 +263,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     child: const Text(
                                       "Register",
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 16.0),
                                     ),
                                     onPressed: () {

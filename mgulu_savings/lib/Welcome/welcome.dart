@@ -49,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
                               textStyle: TextStyle(
                                   color: textColor,
                                   fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w700,
                                   letterSpacing: .2),
                             ),
                           ),
@@ -63,7 +63,7 @@ class WelcomeScreen extends StatelessWidget {
                                 // ignore: prefer_const_constructors
                                 textStyle: TextStyle(
                                     color: textSecondary,
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.normal,
                                     letterSpacing: .2),
                               ),
@@ -98,8 +98,8 @@ class WelcomeScreen extends StatelessWidget {
                                   // ignore: prefer_const_constructors
                                   textStyle: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
                                       letterSpacing: .2),
                                 ),
                               ))

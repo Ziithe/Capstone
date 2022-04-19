@@ -61,7 +61,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           "Welcome Back",
                           style: TextStyle(
                             color: textColor,
-                            fontSize: 28,
+                            fontSize: 25,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -77,7 +77,6 @@ class _LogInScreenState extends State<LogInScreen> {
                                 Text(
                                   "Email Address",
                                   style: const TextStyle(
-                                      fontSize: 18,
                                       fontWeight: FontWeight.w400,
                                       color: textColor),
                                 ),
@@ -119,7 +118,6 @@ class _LogInScreenState extends State<LogInScreen> {
                                 Text(
                                   "Password",
                                   style: const TextStyle(
-                                      fontSize: 18,
                                       fontWeight: FontWeight.w400,
                                       color: textColor),
                                 ),
@@ -176,7 +174,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                         child: const Text(
                                           "Log In",
                                           style: TextStyle(
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w600,
                                               fontSize: 16.0),
                                         ),
                                         onPressed: () {
