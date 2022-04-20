@@ -16,7 +16,7 @@ class joinGroup extends StatefulWidget {
 
 class _joinGroupState extends State<joinGroup> {
   final _formKey = GlobalKey<FormState>();
-  final groupIdController = TextEditingController();
+  TextEditingController groupIdController = TextEditingController();
 
   bool isLoading = false;
 
@@ -169,7 +169,7 @@ class _joinGroupState extends State<joinGroup> {
         'endOn': groupData.get('endOn'),
         'frequency': groupData.get('frequency'),
         'groupType': groupData.get('groupType'),
-        'createdOn': groupData.get('createdOn'),
+        'groupCreated': groupData.get('groupCreated'),
       });
       await _firestore.collection("users").doc(uid).collection("Activity").add({
         'comment': 'Success',
