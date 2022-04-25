@@ -346,7 +346,7 @@ class _sendMoneyState extends State<sendMoney> {
         txRef: _ref!,
         isDebugMode: true,
         phoneNumber: phoneController.text,
-        acceptCardPayment: true,
+        acceptCardPayment: false,
         acceptUSSDPayment: false,
         acceptAccountPayment: false,
         acceptFrancophoneMobileMoney: false,
